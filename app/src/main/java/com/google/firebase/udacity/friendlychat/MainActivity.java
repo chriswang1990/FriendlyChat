@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
-    public static final int RC_SIGN_IN = 1026;
+    private static final int RC_SIGN_IN = 1026;
+    private static final int RC_PHOTO_PICKER = 1949;
 
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
@@ -88,7 +89,10 @@ public class MainActivity extends AppCompatActivity {
         mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Fire an intent to show an image picker
+                Intent photoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                photoIntent.setType("image/jpeg");
+                photoIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(photoIntent, "Complete action using"), RC_PHOTO_PICKER);
             }
         });
 
